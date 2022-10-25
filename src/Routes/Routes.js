@@ -1,6 +1,5 @@
 import About from "../Components/About";
 import Blog from "../Components/Blog";
-import Blogs from "../Components/Blog";
 import Courses from "../Components/Courses";
 import ErrorPage from "../Components/ErrorPage";
 import Home from "../Components/Home";
