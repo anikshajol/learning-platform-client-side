@@ -1,5 +1,6 @@
 import About from "../Components/About";
 import Blog from "../Components/Blog";
+import CourseDetails from "../Components/CourseDetails";
 import Courses from "../Components/Courses";
 import ErrorPage from "../Components/ErrorPage";
 import Home from "../Components/Home";
@@ -33,6 +34,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/courses",
+        loader: () => fetch("http://localhost:5000/course"),
         element: <Courses></Courses>,
       },
       {
@@ -46,6 +48,12 @@ export const routes = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog></Blog>,
+      },
+      {
+        path: "/course/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/course/${params.id}`),
+        element: <CourseDetails></CourseDetails>,
       },
     ],
   },
