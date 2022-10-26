@@ -11,10 +11,10 @@ const SideNav = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center bg-gray-50">
       {products.map((product) => (
-        <aside key={product.id} class="w-64" aria-label="Sidebar">
-          <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+        <aside key={product.id} class="md:w-64" aria-label="Sidebar">
+          <div class="overflow-y-auto py-4 px-3  bg-gray-50 rounded dark:bg-gray-800">
             <ul class="space-y-2">
               <li>
                 <Link
