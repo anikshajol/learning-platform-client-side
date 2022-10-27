@@ -5,7 +5,7 @@ import swal from "sweetalert";
 import { AuthContext } from "../contexts/AuthProvider";
 
 const Register = () => {
-  const { createUser, updateName, verifyEmail, googleSignIn } =
+  const { createUser, updateName, verifyEmail, googleSignIn, gitSignIn } =
     useContext(AuthContext);
 
   const handleSignUP = (e) => {
@@ -45,6 +45,18 @@ const Register = () => {
         console.log(user);
       })
       .catch((error) => console.log(error));
+  };
+
+  const handleGitHubSignIn = () => {
+    gitSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        // swal("You are Successfully Login with GitHub Account");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div className="flex justify-center items-center pt-8">
@@ -146,6 +158,7 @@ const Register = () => {
 
           {/* github */}
           <button
+            onClick={handleGitHubSignIn}
             type="button"
             className="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
           >

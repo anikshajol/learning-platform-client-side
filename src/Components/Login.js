@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import swal from "sweetalert";
 
 import { AuthContext } from "../contexts/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { signIn, resetPassword, googleSignIn } = useContext(AuthContext);
+  const { signIn, resetPassword, googleSignIn, gitSignIn } =
+    useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,10 +17,18 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
     signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        swal("successfully login");
-
+      .then(() => {
+        // swal("successfully login");
+        toast.success("🦄 Wow so easy!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         navigate("/");
       })
       .catch((error) => console.log(error));
@@ -26,12 +36,23 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
+        swal("Sign in with google");
         navigate("/");
       })
       .catch((error) => console.log(error));
+  };
+
+  const handleGitHubSignIn = () => {
+    gitSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        // swal("You are Successfully Login with GitHub Account");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -127,6 +148,7 @@ const Login = () => {
 
           {/* github */}
           <button
+            onClick={handleGitHubSignIn}
             type="button"
             class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
           >

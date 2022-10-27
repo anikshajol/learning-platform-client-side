@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   const googleProvider = new GoogleAuthProvider();
+  const gitProvider = new GithubAuthProvider();
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -39,6 +41,10 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  const gitSignIn = () => {
+    return signInWithPopup(auth, gitProvider);
+  };
+
   const logOut = () => {
     return signOut(auth);
   };
@@ -54,6 +60,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    gitSignIn,
     logOut,
     createUser,
     setUser,

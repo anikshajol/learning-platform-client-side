@@ -12,10 +12,9 @@ const Header = () => {
 
   const handleLogout = () => {
     logOut()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
         swal("Logout successfully");
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
