@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+
+import { AuthContext } from "../contexts/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
-  //   const { signIn, resetPassword, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, resetPassword, googleSignIn } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,23 +14,24 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    // signIn(email, password)
-    //   .then((result) => {
-    //     const user = result.user;
-    //     toast("login successfully");
-    //     navigate("/profile");
-    //   })
-    //   .catch((error) => console.log(error));
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        swal("successfully login");
+
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleGoogleSignIn = () => {
-    // signInWithGoogle()
-    //   .then((result) => {
-    //     const user = result.user;
-    //     console.log(user);
-    //     navigate("/profile");
-    //   })
-    //   .catch((error) => console.log(error));
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -99,11 +103,12 @@ const Login = () => {
         <div className="flex justify-center space-x-4">
           {/* google */}
           <button
+            onClick={handleGoogleSignIn}
             type="button"
-            class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+            className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
           >
             <svg
-              class="mr-2 -ml-1 w-4 h-4"
+              className="mr-2 -ml-1 w-4 h-4"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
@@ -126,7 +131,7 @@ const Login = () => {
             class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
           >
             <svg
-              class="mr-2 -ml-1 w-4 h-4"
+              className="mr-2 -ml-1 w-4 h-4"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"

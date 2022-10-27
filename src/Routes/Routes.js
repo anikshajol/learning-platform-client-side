@@ -3,7 +3,7 @@ import Blog from "../Components/Blog";
 import CourseDetails from "../Components/CourseDetails";
 import Courses from "../Components/Courses";
 import ErrorPage from "../Components/ErrorPage";
-import Home from "../Components/Home";
+
 import Login from "../Components/Login";
 import Register from "../Components/Register";
 import SideNav from "../Components/SideNav";
@@ -17,14 +17,6 @@ export const routes = createBrowserRouter([
     element: <Main></Main>,
     children: [
       {
-        path: "/",
-        element: <Home></Home>,
-      },
-      {
-        path: "/home",
-        element: <Home></Home>,
-      },
-      {
         path: "/login",
         element: <Login></Login>,
       },
@@ -34,6 +26,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/courses",
+        loader: () => fetch("http://localhost:5000/course"),
+        element: <Courses></Courses>,
+      },
+      {
+        path: "/",
         loader: () => fetch("http://localhost:5000/course"),
         element: <Courses></Courses>,
       },

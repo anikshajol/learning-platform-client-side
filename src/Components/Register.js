@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
+
+import { AuthContext } from "../contexts/AuthProvider";
 
 const Register = () => {
-  //   const { createUser, updateName, verifyEmail, signInWithGoogle } =
-  //     useContext(AuthContext);
+  const { createUser, updateName, verifyEmail, googleSignIn } =
+    useContext(AuthContext);
 
   const handleSignUP = (e) => {
     e.preventDefault();
@@ -13,36 +16,35 @@ const Register = () => {
     const password = form.password.value;
     console.log(name, email, password);
 
-    // createUser(email, password)
-    //   .then((result) => {
-    //     const user = result.user;
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
 
-    //     console.log(user);
-    //     updateName(name)
-    //       .then(() => {
-    //         // toast.success("Name updated");
-    //         // Email verification sent!
-    //         verifyEmail().then(() => {
-    //         //   toast.success("Please check inbox.");
-    //           // ...
-    //         });
-    //       })
-    //       .catch((error) => {
-    //         // toast.error(error.message);
-    //       });
-    //   })
-    //   .catch((error) => console.log(error));
+        console.log(user);
+        updateName(name)
+          .then(() => {
+            // Email verification sent!
+            verifyEmail().then(() => {
+              swal("verified your emails", "success");
+              // ...
+            });
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      })
+      .catch((error) => console.log(error));
   };
 
   // googlesignIn
 
   const handleGoogleSignIn = () => {
-    // signInWithGoogle()
-    //   .then((result) => {
-    //     const user = result.user;
-    //     console.log(user);
-    //   })
-    //   .catch((error) => console.log(error));
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div className="flex justify-center items-center pt-8">
@@ -120,11 +122,12 @@ const Register = () => {
         <div className="flex justify-center space-x-4">
           {/* google */}
           <button
+            onClick={handleGoogleSignIn}
             type="button"
-            class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+            className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
           >
             <svg
-              class="mr-2 -ml-1 w-4 h-4"
+              className="mr-2 -ml-1 w-4 h-4"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
@@ -144,10 +147,10 @@ const Register = () => {
           {/* github */}
           <button
             type="button"
-            class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+            className="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
           >
             <svg
-              class="mr-2 -ml-1 w-4 h-4"
+              className="mr-2 -ml-1 w-4 h-4"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"

@@ -1,10 +1,27 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../contexts/AuthProvider";
+import swal from "sweetalert";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        swal("Logout successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="bg-blue-100 py-4 ">
       <nav className="flex px-2 justify-between items-center ">
@@ -18,17 +35,6 @@ const Header = () => {
             open ? "top-12 " : "top-[-520px]"
           }`}
         >
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "md:active bg-blue-800 text-white font-semibold rounded-md p-1"
-                : "hover:text-blue-900 hover:font-semibold hover:text-2xl"
-            }
-            to="/home"
-          >
-            Home
-          </NavLink>
-
           <NavLink
             className={({ isActive }) =>
               isActive
@@ -56,21 +62,42 @@ const Header = () => {
                 ? "md:active bg-blue-800 text-white font-semibold rounded-md p-1"
                 : "hover:text-blue-900 hover:font-semibold hover:text-2xl"
             }
-            to="/login"
+            to="/faq"
           >
-            Login
+            FAQ
           </NavLink>
-
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "md:active bg-blue-800 text-white font-semibold rounded-md p-1"
-                : "hover:text-blue-900 hover:font-semibold hover:text-2xl"
-            }
-            to="/register"
-          >
-            Register
-          </NavLink>
+          {user && user?.uid ? (
+            <NavLink
+              // to="/login"
+              onClick={handleLogout}
+              className="hover:text-blue-900 hover:font-semibold hover:text-2xl"
+            >
+              Logout
+            </NavLink>
+          ) : (
+            <>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "md:active bg-blue-800 text-white font-semibold rounded-md p-1"
+                    : "hover:text-blue-900 hover:font-semibold hover:text-2xl"
+                }
+                to="/login"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "md:active bg-blue-800 text-white font-semibold rounded-md p-1"
+                    : "hover:text-blue-900 hover:font-semibold hover:text-2xl"
+                }
+                to="/register"
+              >
+                Register
+              </NavLink>
+            </>
+          )}
         </section>
 
         {/* hamburger menu icon */}
