@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
 
@@ -7,6 +7,8 @@ import { AuthContext } from "../contexts/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const { signIn, resetPassword, googleSignIn, gitSignIn } =
     useContext(AuthContext);
 
@@ -17,8 +19,7 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
     signIn(email, password)
-      .then(() => {
-        // swal("successfully login");
+      .then((result) => {
         toast.success("🦄 Wow so easy!", {
           position: "top-center",
           autoClose: 5000,
@@ -29,26 +30,26 @@ const Login = () => {
           progress: undefined,
           theme: "light",
         });
-        navigate("/");
+        navigate(from, { replace: true });
+        console.log(result.user);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => swal(error.message));
   };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then(() => {
         swal("Sign in with google");
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
 
   const handleGitHubSignIn = () => {
     gitSignIn()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        // swal("You are Successfully Login with GitHub Account");
+      .then(() => {
+        swal("You are Successfully Login with GitHub Account");
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);

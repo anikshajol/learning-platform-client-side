@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 import { AuthContext } from "../contexts/AuthProvider";
@@ -7,6 +7,8 @@ import { AuthContext } from "../contexts/AuthProvider";
 const Register = () => {
   const { createUser, updateName, verifyEmail, googleSignIn, gitSignIn } =
     useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSignUP = (e) => {
     e.preventDefault();
@@ -43,16 +45,16 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
 
   const handleGitHubSignIn = () => {
     gitSignIn()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        // swal("You are Successfully Login with GitHub Account");
+      .then(() => {
+        swal("You are Successfully Login with GitHub Account");
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
@@ -74,7 +76,7 @@ const Register = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
-                Name
+                Full Name
               </label>
               <input
                 type="text"
@@ -98,6 +100,7 @@ const Register = () => {
                 data-temp-mail-org="0"
               />
             </div>
+
             <div>
               <div className="flex justify-between mb-2">
                 <label htmlFor="password" className="text-sm">
@@ -140,10 +143,10 @@ const Register = () => {
           >
             <svg
               className="mr-2 -ml-1 w-4 h-4"
-              aria-hidden="true"
+              ariaHidden="true"
               focusable="false"
-              data-prefix="fab"
-              data-icon="google"
+              dataPrefix="fab"
+              dataIcon="google"
               role="img"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 488 512"
@@ -164,10 +167,10 @@ const Register = () => {
           >
             <svg
               className="mr-2 -ml-1 w-4 h-4"
-              aria-hidden="true"
+              ariaHidden="true"
               focusable="false"
-              data-prefix="fab"
-              data-icon="github"
+              dataPrefix="fab"
+              dataIcon="github"
               role="img"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 496 512"

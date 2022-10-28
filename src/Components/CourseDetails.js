@@ -1,8 +1,18 @@
+import { Button } from "flowbite-react";
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+
+import { jsPDF } from "jspdf";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 
 const CourseDetails = () => {
   const productDetails = useLoaderData();
+  const checkoutCourse = useLoaderData();
+
+  const doc = new jsPDF();
+  // const handleDownloadPdf = () => {
+
+  // };
 
   const { description, img, title, overview } = productDetails;
 
@@ -10,7 +20,7 @@ const CourseDetails = () => {
 
   return (
     <div className=" flex justify-center mt-8">
-      <div className="flex flex-col items-center rounded-lg   md:max-w-xl  dark:bg-gray-800 ">
+      <div className="flex flex-col items-center rounded-lg  md:max-w-xl  dark:bg-gray-800 ">
         <img
           className="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-5/12 md:rounded-none md:rounded-l-lg"
           src={img}
@@ -28,7 +38,29 @@ const CourseDetails = () => {
             <li>{b}</li>
             <li>{c}</li>
           </p>
+          <div className="flex justify-start">
+            <Link to={`/checkout/${checkoutCourse.id}`}>
+              <Button color="warning">
+                <span className="p-2 text-xl font-bold">
+                  Get premium access
+                </span>{" "}
+                <ArrowRightIcon className="w-12 h-8 ml-2 font-bold" />
+              </Button>
+            </Link>
+          </div>
         </div>
+      </div>
+
+      <div>
+        <Button
+          onClick={() => {
+            doc.text("hello", 10, 10);
+            doc.save("a4.pdf");
+          }}
+          gradientMonochrome="success"
+        >
+          Download pdf
+        </Button>
       </div>
     </div>
   );

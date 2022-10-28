@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, UsersIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../contexts/AuthProvider";
 import swal from "sweetalert";
 
@@ -30,7 +30,7 @@ const Header = () => {
           </Link>
         </section>
         <section
-          className={` nav text-2xl bg-teal-700 justify-end text-white flex flex-col md:flex-row md:text-black  gap-x-4 p-2 w-full  md:bg-blue-100 text-center md:text-right md:static absolute right-[1px] md:right-0  top-16 duration-1000 ease-in-out ${
+          className={` nav text-2xl bg-teal-700 justify-end text-white flex flex-col md:flex-row md:items-center md:text-black  gap-x-4 p-2 w-full  md:bg-blue-100 text-center md:text-right md:static absolute right-[1px] md:right-0  top-16 duration-1000 ease-in-out ${
             open ? "top-12 " : "top-[-520px]"
           }`}
         >
@@ -65,14 +65,30 @@ const Header = () => {
           >
             FAQ
           </NavLink>
+
           {user && user?.uid ? (
-            <NavLink
-              // to="/login"
-              onClick={handleLogout}
-              className="hover:text-blue-900 hover:font-semibold hover:text-2xl"
-            >
-              Logout
-            </NavLink>
+            <>
+              <NavLink
+                onClick={handleLogout}
+                className="hover:text-blue-900 hover:font-semibold hover:text-2xl"
+              >
+                Logout
+              </NavLink>
+              <NavLink>{user.displayName}</NavLink>
+              <NavLink>
+                {user?.photoURL ? (
+                  <label tabIndex={0} className="btn m-1">
+                    <img
+                      className="w-12 rounded-full"
+                      src={user.photoURL}
+                      alt=""
+                    />
+                  </label>
+                ) : (
+                  <UsersIcon></UsersIcon>
+                )}
+              </NavLink>
+            </>
           ) : (
             <>
               <NavLink
