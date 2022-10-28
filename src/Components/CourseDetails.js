@@ -54,8 +54,8 @@ const CourseDetails = () => {
       <div>
         <Button
           onClick={() => {
-            doc.text("hello", 10, 10);
-            doc.save("a4.pdf");
+            doc.text(description, 10, 10);
+            doc.save("nextCoder.pdf");
           }}
           gradientMonochrome="success"
         >
