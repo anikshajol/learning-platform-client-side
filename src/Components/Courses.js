@@ -6,7 +6,7 @@ const Courses = () => {
   const courses = useLoaderData();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-12 mt-12 ">
+    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-12 mt-12 mx-auto container ">
       <section className="md:col-span-2 ">
         <SideNav></SideNav>
       </section>

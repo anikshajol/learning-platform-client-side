@@ -25,7 +25,7 @@ const Header = () => {
     <div className="bg-blue-100 py-4 ">
       <nav className="flex px-2 justify-between items-center ">
         <section className="text-2xl ">
-          <Link to="/home">
+          <Link to="/">
             <h2 className="">NextCoder</h2>
           </Link>
         </section>
