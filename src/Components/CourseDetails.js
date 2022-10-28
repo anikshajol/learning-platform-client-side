@@ -19,28 +19,28 @@ const CourseDetails = () => {
   const [a, b, c] = overview;
 
   return (
-    <div className=" flex justify-center mt-8">
-      <div className="flex flex-col items-center rounded-lg  md:max-w-xl  dark:bg-gray-800 ">
+    <div className=" flex justify-center gap-8 mt-8 bg-[#ecf0f1] p-4 ">
+      <div className="flex flex-col items-center rounded-lg p-4  md:max-w-xl bg-[#512DA8] text-white dark:bg-gray-800 ">
         <img
           className="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-5/12 md:rounded-none md:rounded-l-lg"
           src={img}
           alt=""
         />
         <div className="flex flex-col justify-between p-4 leading-normal">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">
             {title}
           </h5>
-          <p className="  text-2xl  mb-3 font-normal text-gray-700 dark:text-gray-400">
+          <p className="  text-2xl  mb-3 font-normal text-white dark:text-gray-400">
             {description}
           </p>
-          <p className="mb-3 font-normal text-xl text-gray-700 dark:text-gray-400">
+          <p className="mb-3 font-normal text-xl text-white dark:text-gray-400">
             <li>{a}</li>
             <li>{b}</li>
             <li>{c}</li>
           </p>
           <div className="flex justify-start">
             <Link to={`/checkout/${checkoutCourse.id}`}>
-              <Button color="warning">
+              <Button className="bg-[#FFC107] text-black hover:text-white hover:bg-[#FFC107] hover:pr-5 transition-all duration-200">
                 <span className="p-2 text-xl font-bold">
                   Get premium access
                 </span>{" "}

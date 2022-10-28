@@ -11,15 +11,15 @@ const SideNav = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-50">
+    <div className="flex flex-col items-center justify-center bg-[#1abc9c]">
       {products.map((product) => (
         <aside key={product.id} className="md:w-64" aria-label="Sidebar">
-          <div className="overflow-y-auto py-4 px-3  bg-gray-50 rounded dark:bg-gray-800">
+          <div className="overflow-y-auto py-4 px-3  bg-[#1abc9c]  rounded dark:bg-gray-800">
             <ul className="space-y-2">
               <li>
                 <Link
                   to={`/course/${product.id}`}
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="flex items-center p-2  font-semibold text-gray-900 text-lg rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <svg
                     aria-hidden="true"
