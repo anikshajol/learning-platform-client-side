@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
@@ -8,9 +8,20 @@ import { AuthContext } from "../contexts/AuthProvider";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [userEmail, setUserEmail] = useState("");
   const from = location.state?.from?.pathname || "/";
   const { signIn, resetPassword, googleSignIn, gitSignIn } =
     useContext(AuthContext);
+
+  const handleReset = () => {
+    resetPassword(userEmail)
+      .then(() => {
+        swal(" reset link has been sents into you email ");
+      })
+      .catch((error) => {
+        swal(error.message);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -77,6 +88,7 @@ const Login = () => {
                 Email address
               </label>
               <input
+                onBlur={(e) => setUserEmail(e.target.value)}
                 type="email"
                 name="email"
                 id="email"
@@ -111,7 +123,10 @@ const Login = () => {
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline text-gray-400">
+          <button
+            onClick={handleReset}
+            className="text-xs hover:underline text-gray-400"
+          >
             Forgot password?
           </button>
         </div>
@@ -151,7 +166,7 @@ const Login = () => {
           <button
             onClick={handleGitHubSignIn}
             type="button"
-            class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+            className="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
           >
             <svg
               className="mr-2 -ml-1 w-4 h-4"

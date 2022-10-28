@@ -27,7 +27,7 @@ const Register = () => {
           .then(() => {
             // Email verification sent!
             verifyEmail().then(() => {
-              swal("verified your emails", "success");
+              swal("verified your emails");
               // ...
             });
           })

@@ -17,11 +17,13 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const googleProvider = new GoogleAuthProvider();
   const gitProvider = new GithubAuthProvider();
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -30,22 +32,27 @@ const AuthProvider = ({ children }) => {
   };
 
   const signIn = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const verifyEmail = () => {
+    setLoading(true);
     return sendEmailVerification(auth.currentUser);
   };
 
   const googleSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   const gitSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, gitProvider);
   };
 
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -53,12 +60,14 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (createUser) => {
       console.log(createUser);
       setUser(createUser);
+      setLoading(false);
     });
 
     return () => unSubscribe();
   }, []);
 
   const authInfo = {
+    loading,
     user,
     gitSignIn,
     logOut,

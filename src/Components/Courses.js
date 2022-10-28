@@ -11,7 +11,7 @@ const Courses = () => {
         <SideNav></SideNav>
       </section>
 
-      <section className=" dark:bg-gray-800 dark:hover:bg-gray-700 md:col-span-10 lg:ml-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 mt-8 p-4 lg:mt-0 lg:p-0">
+      <section className=" dark:bg-gray-800 dark:hover:bg-gray-700 md:col-span-10 lg:ml-12 grid grid-cols-1 md:grid-cols-2 md:gap-x-8 lg:grid-cols-3 gap-y-10 mt-8 p-4 lg:mt-0 lg:p-0">
         {courses.map((course) => (
           <div
             key={course.id}
