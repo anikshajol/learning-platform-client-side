@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-[#2c3e50] text-white  ">
+    <div className="bg-[#2c3e50] text-white py-2 md:py-0  ">
       <nav className="flex px-2 justify-between items-center ">
         <section className="text-2xl text-white ">
           <Link to="/">
@@ -30,7 +30,7 @@ const Header = () => {
           </Link>
         </section>
         <section
-          className={` nav text-2xl  justify-end text-white flex flex-col md:flex-row md:items-center md:text-black  gap-x-6 p-2 w-full text-center bg-[#2c3e50] md:text-right md:static absolute right-[1px] md:right-0  top-16 duration-1000 ease-in-out ${
+          className={` nav text-2xl  justify-end text-white flex flex-col-reverse md:flex-row md:items-center md:text-black  gap-x-6 p-2 w-full text-center bg-[#2c3e50] md:text-right md:static absolute right-[1px] md:right-0  top-16 duration-1000 ease-in-out ${
             open ? "top-12 " : "top-[-520px]"
           }`}
         >
@@ -79,7 +79,11 @@ const Header = () => {
               </NavLink>
               <NavLink>
                 {user?.photoURL ? (
-                  <label tabIndex={0} className="btn m-1 cursor-pointer">
+                  <label
+                    tabIndex={0}
+                    className="btn m-1 inline-block
+                     cursor-pointer"
+                  >
                     <img
                       title={user?.displayName}
                       className="w-12 rounded-full"
@@ -125,16 +129,16 @@ const Header = () => {
           )}
           <div>
             <label
-              for="default-toggle"
-              class="inline-flex relative items-center cursor-pointer"
+              htmlFor="default-toggle"
+              className="inline-flex relative items-center cursor-pointer"
             >
               <input
                 type="checkbox"
                 value=""
                 id="default-toggle"
-                class="sr-only peer"
+                className="sr-only peer"
               />
-              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
           </div>
         </section>

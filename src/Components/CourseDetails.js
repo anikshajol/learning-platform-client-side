@@ -37,7 +37,10 @@ const CourseDetails = () => {
           </p>
           <div className="flex justify-start">
             <Link to={`/checkout/${checkoutCourse.id}`}>
-              <Button className="bg-yellow-200 w-full text-black hover:text-white hover:bg-yellow-500 hover:pr-5 transition-all duration-200">
+              <Button
+                color={"orange"}
+                className="bg-yellow-200 w-full text-black hover:text-white hover:bg-yellow-500 hover:pr-5 transition-all duration-200"
+              >
                 <span className="p-2  md:text-xl font-bold">
                   Get premium access
                 </span>
