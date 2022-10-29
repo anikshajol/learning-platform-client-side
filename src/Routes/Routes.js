@@ -1,4 +1,3 @@
-import About from "../Components/About";
 import Blog from "../Components/Blog";
 import CheckOut from "../Components/CheckOut";
 import CourseDetails from "../Components/CourseDetails";
@@ -41,10 +40,7 @@ export const routes = createBrowserRouter([
         path: "/sidebar",
         element: <SideNav></SideNav>,
       },
-      {
-        path: "/about",
-        element: <About></About>,
-      },
+
       {
         path: "/blog",
         element: <Blog></Blog>,
