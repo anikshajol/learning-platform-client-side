@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
-import { Bars3Icon, UsersIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../contexts/AuthProvider";
 import swal from "sweetalert";
 
@@ -22,11 +22,11 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-[#2c3e50] text-white py-4 ">
+    <div className="bg-[#2c3e50] text-white  ">
       <nav className="flex px-2 justify-between items-center ">
         <section className="text-2xl text-white ">
           <Link to="/">
-            <h2 className="">NextCoder</h2>
+            <h2 className="font-bold font-serif">NextCoder</h2>
           </Link>
         </section>
         <section
@@ -79,15 +79,23 @@ const Header = () => {
               </NavLink>
               <NavLink>
                 {user?.photoURL ? (
-                  <label tabIndex={0} className="btn m-1">
+                  <label tabIndex={0} className="btn m-1 cursor-pointer">
                     <img
+                      title={user?.displayName}
                       className="w-12 rounded-full"
                       src={user.photoURL}
                       alt=""
                     />
                   </label>
                 ) : (
-                  <UsersIcon></UsersIcon>
+                  <label tabIndex={0} className="btn m-1 cursor-pointer">
+                    <img
+                      title={user?.displayName}
+                      className="w-12 rounded-full"
+                      src="https://www.spica-siam.com/wp-content/uploads/2017/12/user-demo.png"
+                      alt=""
+                    />
+                  </label>
                 )}
               </NavLink>
             </>
@@ -113,22 +121,22 @@ const Header = () => {
               >
                 Register
               </NavLink>
-              <div>
-                <label
-                  for="default-toggle"
-                  class="inline-flex relative items-center cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value=""
-                    id="default-toggle"
-                    class="sr-only peer"
-                  />
-                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                </label>
-              </div>
             </>
           )}
+          <div>
+            <label
+              for="default-toggle"
+              class="inline-flex relative items-center cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                value=""
+                id="default-toggle"
+                class="sr-only peer"
+              />
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
         </section>
 
         {/* hamburger menu icon */}

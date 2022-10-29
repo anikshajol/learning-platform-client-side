@@ -18,7 +18,7 @@ const ErrorPage = () => {
         <section className="mt-14">
           <Link
             to="/"
-            className="px-8  py-3 font-semibold rounded bg-gray-900 hover:bg-gray-700 text-white"
+            className="px-6  py-3 font-semibold rounded bg-gray-900 hover:bg-gray-700 text-white"
           >
             Back to homepage
           </Link>
