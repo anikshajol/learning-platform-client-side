@@ -44,7 +44,10 @@ const Login = () => {
         navigate(from, { replace: true });
         console.log(result.user);
       })
-      .catch((error) => swal(error.message));
+      .catch((error) => {
+        swal(error.message);
+        console.log(error);
+      });
   };
 
   const handleGoogleSignIn = () => {
